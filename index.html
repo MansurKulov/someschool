@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Великий Выбор</title>
+    <link id="favicon" rel="shortcut icon" href="https://schtirlitz.ru/800/600/https/cdn.onlinewebfonts.com/svg/img_524742.png">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Ubuntu+Condensed&display=swap');
+      * {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      }
+
+      body{
+        padding: 20px;
+        font-family: 'Ubuntu Condensed', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #wrapper{
+        width: 90vw;
+      }
+      #button{
+        width: 100%;
+        height: min(15vh , 15vw);
+        font-size: min(5vh , 5vw);
+        font-family: 'Ubuntu Condensed', sans-serif;
+      }
+      #teacher_target{
+        margin-top: 20px;
+        padding: 20px;
+        font-size: min(4vh , 4vw);
+        display: grid;
+        gap: 30px;
+      }
+      #counter_in{
+        font-family: 'Ubuntu Condensed', sans-serif;
+        font-size: min(4vh , 4vw);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <button id="button" onclick="createTargetList(+document.getElementById('counter_in').value , 0 , class_list.length-1)">
+        Случайные человеки
+      </button>
+      <ul id="teacher_target"></ul>
+      <div id="counter">
+        <input value="5" id="counter_in"/>
+      </div>
+    </div>
+
+    <script>
+      let class_list = [
+        "Абдыкадырова Аяна",
+        "Абдыкаров Бактилек",
+        "Абдынасырова Ханайым",
+        "Афанасьева Екатерина",
+        "Ахметова София",
+        "Бакытов Даниэль",
+        "Барышева Ирина",
+        "Благодарева Полина",
+        "Велямова Раногуль",
+        "Горностаева Милана",
+        "Даниярова Лейла",
+        "Джыргалбеков Эрбол",
+        "Закирова Лия",
+        "Закирова Таснима",
+        "Зубцова Ксения",
+        "Кадыров Нурдоолот",
+        "Каныбеков Алнамыс",
+        "Касымова Гюзаля",
+        "Корегин Андрей",
+        "Корниенко Данил",
+        "Кудайбергенов Кямран",
+        "Кудайбергенова Дильназа",
+        `<span style="font-family: 'Pacifico', cursive;">Кулов Мансур</span>`,
+        "Маматжанов Байэл",
+        "Масюмов Рияд",
+        "Мухамедалиев Тамерлан",
+        "Ниязова Насиба",
+        "Нуркасымов Руслан",
+        "Орозмаматова Алтынай",
+        "Павличенко София",
+        "Пензова Арина",
+        "Пузанкова Алина",
+        "Сабиров Ислам",
+        "Салимов Азиз",
+        "Саякова Адина",
+        "Саякова Альбина",
+        "Сиротин Александр",
+        "Токтосунова Мээрим",
+        "Усенова Даткайым",
+        "Хаустова Светлана",
+        "Хусаинов Даниил",
+        "Шамырбекова Бегайым",
+      ];
+      let teacher_target = document.getElementById("teacher_target");
+
+      function inArray(arr, num) {
+        for (let i = 0; i < arr.length; i++) {
+          if (num == arr[i]) return true;
+        }
+        return false;
+      }
+
+      function createRand(randLength, min, max) {
+        let randArray = [],
+          i = 0;
+        if (randLength > max - min + 1) {
+          return null;
+        }
+        while (i < randLength) {
+          let rand = Math.floor(Math.random() * (max - min + 1)) + min;
+          if (!inArray(randArray, rand)) {
+            i++;
+            randArray.unshift(rand);
+          }
+        }
+        return randArray;
+      }
+      
+      function createTargetList(randLength , min , max){
+        teacher_target.innerHTML = ''
+        createRand(randLength, min, max).map((e) => {
+          teacher_target.innerHTML += `<li>${class_list[e]}</li>`;
+        });
+      }
+      createTargetList(5 , 0 , class_list.length-1)
+    </script>
+  </body>
+</html>
